@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Блог</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Мой Блог</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Статьи</a></li>
+                    <li><a href="#">Обо мне</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Последние статьи</h1>
+        <div class="articles">
+            {% for article in articles %}
+                <article>
+
+                        <div class="article-img">Изображение статьи</div>
+                        <div class="article-content">
+                            <h2>{{ article.header }}</h2>
+                            <div class="article-meta">Опубликовано: {{ article.created_at }}</div>
+                            <p> {{ article.text|truncatechars:100 }}</p>
+                            <a href="{{ article.get_absolute_url }}" class="read-more">Читать далее</a>
+                        </div>
+                </article>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>© 2023 Мой Блог. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
